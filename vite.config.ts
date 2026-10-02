@@ -1,13 +1,23 @@
-import { defineConfig } from 'vite'
+import { defineConfig } from 'vite';
+import { resolve, dirname } from 'node:path';
+import { fileURLToPath } from 'node:url';
 
-// Served from agent.synotech.dev/operations/* — base must match the mount
-// path or every asset 404s behind the prefix (same lesson as the consoles).
+const root = dirname(fileURLToPath(import.meta.url));
+
+// Multi-page: pretty URLs under the /operations/ mount.
 export default defineConfig({
   base: '/operations/',
   build: {
-    // Served from agent.synotech.dev/operations*: edge maps the request path
-    // onto the asset path, so files must live under dist/operations/.
     outDir: 'dist/operations',
     emptyOutDir: true,
+    rollupOptions: {
+      input: {
+        main: resolve(root, 'index.html'),
+        organization: resolve(root, 'organization/index.html'),
+        topology: resolve(root, 'topology/index.html'),
+        bots: resolve(root, 'bots/index.html'),
+        brand: resolve(root, 'brand/index.html'),
+      },
+    },
   },
-})
+});

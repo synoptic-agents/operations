@@ -1,56 +1,122 @@
-// Editorial inline-SVG diagrams (diagram-design philosophy: flat, no shadows,
-// accent reserved for the focal node, density over decoration).
+// Editorial SVG builders — diagram-design grammar:
+// orthogonal connectors only (no diagonals), zones before arrows before nodes,
+// one focal node per diagram, legend strip at bottom, density over decoration.
 const INK = '#e8edf2';
 const MUTED = '#8b98a9';
 const ACCENT = '#43ffc0';
 const PAPER2 = '#1a2230';
-const RULE = 'rgba(139,152,169,0.28)';
+const RULE = 'rgba(139,152,169,0.30)';
 const F = "font-family='Inter,-apple-system,Segoe UI,Roboto,sans-serif'";
 
-function node(x: number, y: number, w: number, h: number, title: string, sub: string, focal = false): string {
-  const stroke = focal ? ACCENT : RULE;
-  const sw = focal ? 2 : 1;
+const defs = `<defs>
+  <marker id="ah" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+    <path d="M0,0 L8,4 L0,8" fill="none" stroke="${MUTED}" stroke-width="1.2"/>
+  </marker>
+</defs>`;
+
+export interface OrgNode { title: string; sub: string; color?: string; focal?: boolean; dashed?: boolean }
+
+function box(x: number, y: number, w: number, h: number, n: OrgNode): string {
+  const stroke = n.focal ? ACCENT : n.color ?? RULE;
+  const sw = n.focal ? 2 : 1.4;
+  const dash = n.dashed ? ' stroke-dasharray="5,4"' : '';
   return `<g>
-    <rect x="${x}" y="${y}" width="${w}" height="${h}" rx="10" fill="${PAPER2}" stroke="${stroke}" stroke-width="${sw}"/>
-    <text x="${x + 14}" y="${y + 24}" ${F} font-size="13" font-weight="600" fill="${focal ? ACCENT : INK}">${title}</text>
-    <text x="${x + 14}" y="${y + 42}" ${F} font-size="11" fill="${MUTED}">${sub}</text>
+    <rect x="${x}" y="${y}" width="${w}" height="${h}" rx="10" fill="${PAPER2}" stroke="${stroke}" stroke-width="${sw}"${dash}/>
+    ${n.color && !n.focal ? `<rect x="${x}" y="${y}" width="4" height="${h}" rx="2" fill="${n.color}"/>` : ''}
+    <text x="${x + 16}" y="${y + 25}" ${F} font-size="13.5" font-weight="600" fill="${n.focal ? ACCENT : INK}">${n.title}</text>
+    <text x="${x + 16}" y="${y + 43}" ${F} font-size="11" fill="${MUTED}">${n.sub}</text>
   </g>`;
 }
 
-function arrow(x1: number, y1: number, x2: number, y2: number, label = ''): string {
-  return `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="${MUTED}" stroke-width="1.2" marker-end="url(#ah)"/>
-    ${label ? `<text x="${(x1 + x2) / 2 + 6}" y="${(y1 + y2) / 2 - 6}" ${F} font-size="10" fill="${MUTED}">${label}</text>` : ''}`;
+/** Vertical drop from parent bottom-center to a horizontal bus, then drops to each child top-center. */
+function bus(px: number, py: number, busY: number, xs: number[], childTop: number): string {
+  const min = Math.min(...xs);
+  const max = Math.max(...xs);
+  let s = `<path d="M ${px},${py} V ${busY}" fill="none" stroke="${MUTED}" stroke-width="1.2"/>`;
+  s += `<line x1="${min}" y1="${busY}" x2="${max}" y2="${busY}" stroke="${MUTED}" stroke-width="1.2"/>`;
+  for (const x of xs) {
+    s += `<path d="M ${x},${busY} V ${childTop}" fill="none" stroke="${MUTED}" stroke-width="1.2" marker-end="url(#ah)"/>`;
+  }
+  return s;
 }
 
-const defs = `<defs><marker id="ah" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8" fill="none" stroke="${MUTED}" stroke-width="1.2"/></marker></defs>`;
+function zone(x: number, y: number, w: number, h: number, label: string): string {
+  const lw = label.length * 6.6 + 28;
+  return `<rect x="${x}" y="${y}" width="${w}" height="${h}" rx="10" fill="rgba(139,152,169,0.05)" stroke="${RULE}" stroke-width="0.8"/>
+    <rect x="${x + 14}" y="${y + 5}" width="${lw}" height="16" rx="3" fill="#0f141a"/>
+    <text x="${x + 28}" y="${y + 17}" ${F} font-size="10.5" letter-spacing="1.5" fill="${MUTED}">${label.toUpperCase()}</text>`;
+}
 
-/** Public edge: client -> Cloudflare -> tunnel -> VM loopback origins. */
-export function edgeDiagram(): string {
-  return `<svg class="diagram" viewBox="0 0 1000 250" role="img" aria-label="Public edge flow">${defs}
-    ${node(10, 90, 170, 60, 'Client', 'browser · CLI · app')}
-    ${arrow(180, 120, 230, 120)}
-    ${node(230, 90, 200, 60, 'Cloudflare edge', 'DNS · tunnel · /v1 bypass')}
-    ${arrow(430, 120, 480, 120)}
-    ${node(480, 90, 230, 60, 'OCI VM · 193.122.242.50', 'loopback only, no open ports')}
-    ${arrow(710, 120, 760, 120)}
-    ${node(760, 40, 230, 60, 'hermes-server :8642/:9120', 'gateway + dashboard', true)}
-    ${node(760, 150, 230, 60, 'be ×3 · website · RAG', ':8101–8105 + tunnels')}
+const legend = (items: [string, string][]): string =>
+  `<g>${items.map(([label, color], i) => {
+    const x = 14 + i * 210;
+    const swatch = color === 'dashed'
+      ? `<rect x="${x}" y="0" width="14" height="10" rx="2" fill="none" stroke="${MUTED}" stroke-dasharray="3,2"/>`
+      : `<circle cx="${x + 7}" cy="5" r="5" fill="${color}"/>`;
+    return `${swatch}<text x="${x + 22}" y="9" ${F} font-size="10.5" fill="${MUTED}">${label}</text>`;
+  }).join('')}</g>`;
+
+/** Overview org chart: command center -> 4 product lines + platform. 9 nodes. */
+export function orgOverview(): string {
+  const W = 200;
+  const H = 62;
+  const rootX = 500;
+  const rootY = 20;
+  const kids = [60, 295, 530, 765];
+  const kidY = 190;
+  return `<svg class="diagram" viewBox="0 0 1000 330" role="img" aria-label="Organization overview">${defs}
+    ${box(rootX - 110, rootY, 220, H, { title: 'Synotech Operator', sub: 'command center · owner', focal: true })}
+    ${bus(rootX, rootY + H, 140, kids.map((x) => x + W / 2), kidY)}
+    ${box(kids[0], kidY, W, H, { title: 'Ventry', sub: 'ventry.africa · events + wallet', color: '#c800c8' })}
+    ${box(kids[1], kidY, W, H, { title: 'Vya', sub: 'vya.to · e-hailing + logistics', color: '#C2410C' })}
+    ${box(kids[2], kidY, W, H, { title: 'KrugerGold', sub: 'kruger.gold · gold + crypto', color: '#B8860B' })}
+    ${box(kids[3], kidY, W, H, { title: 'Platform', sub: 'ERP · syCode · RAG · infra', color: ACCENT })}
+    <g transform="translate(0,296)">${legend([['command center', ACCENT], ['product line', MUTED]])}</g>
   </svg>`;
 }
 
-/** Runtime: one box, loopback services, outbound-only tunnels. */
-export function runtimeDiagram(): string {
-  return `<svg class="diagram" viewBox="0 0 1000 300" role="img" aria-label="Runtime topology">${defs}
-    <rect x="10" y="10" width="980" height="280" rx="12" fill="none" stroke="${RULE}" stroke-dasharray="6 5"/>
-    <text x="26" y="36" ${F} font-size="12" fill="${MUTED}">OCI Always Free VM — everything loopback-bound, tunnels dial out</text>
-    ${node(30, 60, 210, 60, 'hermes-server', '16 profiles · :8642 · :9120', true)}
-    ${node(260, 60, 210, 60, 'dr-secondary', 'be ×3 · chain · website')}
-    ${node(490, 60, 210, 60, 'ERP fleet', '12 sites · MariaDB · Redis')}
-    ${node(720, 60, 210, 60, 'rag · sycode · pg', 'dedicated tunnels')}
-    ${node(30, 150, 300, 60, 'hermes-oci-dashboard', 'agent · erp-* · code · metrics')}
-    ${node(350, 150, 300, 60, 'dr-secondary-*', 'per-tenant + central')}
-    ${node(670, 150, 260, 60, 'rag tunnel', 'rag.synotech.dev')}
-    ${arrow(360, 210, 360, 236)}${arrow(640, 210, 640, 236)}${arrow(880, 210, 880, 236)}
-    <text x="30" y="262" ${F} font-size="12" fill="${MUTED}">egress 193.122.242.50 · secrets in SSM · zero GitHub secrets on wallet trains</text>
+/** Bot responsibility chart: sections as zones, bots as chips. */
+export function botSections(sections: { name: string; color: string; bots: { title: string; slug: string }[] }[]): string {
+  const zoneW = 470;
+  const zoneH = 200;
+  let s = `<svg class="diagram" viewBox="0 0 1000 ${60 + Math.ceil(sections.length / 2) * (zoneH + 24)}" role="img" aria-label="Bot responsibility map">${defs}`;
+  sections.forEach((sec, i) => {
+    const col = i % 2;
+    const row = Math.floor(i / 2);
+    const x = 14 + col * (zoneW + 12);
+    const y = 14 + row * (zoneH + 24);
+    s += zone(x, y, zoneW, zoneH, sec.name);
+    sec.bots.forEach((b, j) => {
+      const bx = x + 16 + (j % 2) * 222;
+      const by = y + 44 + Math.floor(j / 2) * 48;
+      s += `<g><rect x="${bx}" y="${by}" width="210" height="38" rx="8" fill="${PAPER2}" stroke="${RULE}"/>
+        <circle cx="${bx + 16}" cy="${by + 19}" r="6" fill="${sec.color}"/>
+        <text x="${bx + 30}" y="${by + 24}" ${F} font-size="12" fill="${INK}">${b.title}</text></g>`;
+    });
+  });
+  s += `<g transform="translate(0,${30 + Math.ceil(sections.length / 2) * (zoneH + 24)})">${legend([['bot', MUTED], ['section color = team', ACCENT]])}</g></svg>`;
+  return s;
+}
+
+/** Runtime architecture: zones with elbow connectors, focal gateway. */
+export function runtimeArch(): string {
+  // Elbow: right+down with r=8, per architecture type rules.
+  const elbow = (x1: number, y1: number, x2: number, y2: number): string => {
+    const mid = (x1 + x2) / 2;
+    return `<path d="M ${x1},${y1} H ${mid - 8} Q ${mid},${y1} ${mid},${y1 + 8} V ${y2 - 8} Q ${mid},${y2} ${mid + 8},${y2} H ${x2}" fill="none" stroke="${MUTED}" stroke-width="1.2" marker-end="url(#ah)"/>`;
+  };
+  return `<svg class="diagram" viewBox="0 0 1000 420" role="img" aria-label="Runtime architecture">${defs}
+    ${zone(10, 10, 980, 120, 'public edge · cloudflare')}
+    ${box(40, 58, 200, 56, { title: 'DNS + tunnels', sub: 'zones · tunnel ingress' })}
+    ${box(280, 58, 220, 56, { title: 'Access policy', sub: '/v1 bypass · dashboard login' })}
+    ${box(540, 58, 200, 56, { title: 'Worker: operations', sub: '/operations/* · this page' })}
+    ${zone(10, 150, 980, 220, 'oci vm · 193.122.242.50 · loopback only')}
+    ${box(40, 210, 240, 60, { title: 'hermes-server', sub: '16 profiles · :8642 · :9120', focal: true })}
+    ${box(310, 210, 200, 60, { title: 'be ×3 + website', sub: ':8101–8105 · nginx' })}
+    ${box(540, 210, 200, 60, { title: 'ERP · RAG · syCode', sub: 'compose fleets' })}
+    ${box(770, 210, 190, 60, { title: 'db-pg · db-redis', sub: ':5434 · :6380' })}
+    ${elbow(640, 114, 160, 210)}
+    ${elbow(640, 114, 410, 210)}
+    <g transform="translate(0,392)">${legend([['serving gateway', ACCENT], ['origin (loopback)', MUTED]])}</g>
   </svg>`;
 }

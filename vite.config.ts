@@ -4,7 +4,8 @@ import { fileURLToPath } from 'node:url';
 
 const root = dirname(fileURLToPath(import.meta.url));
 
-// Multi-page: pretty URLs under the /operations/ mount.
+// Static multi-page: pretty URLs under the /operations/ mount.
+// No client JS — pages are self-contained HTML+SVG (diagram-design output).
 export default defineConfig({
   base: '/operations/',
   build: {
@@ -20,4 +21,5 @@ export default defineConfig({
       },
     },
   },
+  publicDir: 'public',
 });

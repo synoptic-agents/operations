@@ -1,21 +1,51 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Synotech Operations</title>
-    <meta name="description" content="Synotech estate observability." />
-    <link rel="stylesheet" href="./src/style.css" />
-  </head>
-  <body>
-    <header class="wrap">
-      <p class="kicker">Synotech · Operations</p>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Synotech Operations</title>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/operations/assets/dd.css">
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <p class="header-eyebrow">Synotech · Operations</p>
       <h1>Run the estate from one page</h1>
-      <p class="lede">Sixteen bots, one box, one edge. Start with the organization — the architecture lives on its own page.</p>
-      <nav id="nav"></nav>
-    </header>
-    <main class="wrap" id="app"></main>
-    <footer class="wrap"><p>Source: <code>synoptic-agents/operations</code> · public by owner decision.</p></footer>
-    <script type="module" src="./src/home.ts"></script>
-  </body>
+      <p class="subtitle">Sixteen bots, one box, one edge. Start with the organization — the architecture lives on its own page.</p>
+      <nav class="topnav"><a href="/operations/" class="on">Overview</a><a href="/operations/organization/">Organization</a><a href="/operations/topology/">Architecture</a><a href="/operations/bots/">Bots</a><a href="/operations/brand/">Brand</a></nav>
+    </div>
+
+    <div class="diagram-container">
+      <svg viewBox="0 0 1040 340" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="home-title home-desc">
+        <title id="home-title">Estate overview</title><desc id="home-desc">Command center routing to four lines: three products and platform.</desc>
+        <rect width="1040" height="340" fill="#f5f5f5"/>
+        <defs><marker id="arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0,8 3,0 6" fill="#4f5d75"/></marker></defs>
+        <text x="40" y="52" fill="#4f5d75" font-family="'Geist Mono',monospace" font-size="9" letter-spacing=".16em">COMMAND CENTER</text>
+        <text x="40" y="184" fill="#4f5d75" font-family="'Geist Mono',monospace" font-size="9" letter-spacing=".16em">LINES</text>
+        <line x1="36" y1="136" x2="1004" y2="136" stroke="rgba(45,49,66,.12)"/>
+        <path d="M 520 108 L 520 160 L 200 160 L 200 208" fill="none" stroke="#4f5d75" stroke-width="1"/>
+        <path d="M 520 160 L 412 160 L 412 208" fill="none" stroke="#4f5d75" stroke-width="1"/>
+        <path d="M 520 160 L 628 160 L 628 208" fill="none" stroke="#4f5d75" stroke-width="1"/>
+        <path d="M 520 160 L 840 160 L 840 208" fill="none" stroke="#4f5d75" stroke-width="1"/>
+        <rect x="420" y="60" width="200" height="48" rx="6" fill="#f5f5f5"/><rect x="420" y="60" width="200" height="48" rx="6" fill="rgba(235,108,54,.08)" stroke="#eb6c36"/>
+        <rect x="428" y="68" width="48" height="12" rx="2" fill="transparent" stroke="#eb6c36" opacity=".55"/><text x="452" y="77" fill="#eb6c36" font-family="'Geist Mono',monospace" font-size="9" text-anchor="middle" letter-spacing=".08em">FRONT</text>
+        <text x="520" y="92" fill="#2d3142" font-family="'Geist',sans-serif" font-size="12" font-weight="600" text-anchor="middle">Synotech Operator</text><text x="520" y="104" fill="#4f5d75" font-family="'Geist Mono',monospace" font-size="9" text-anchor="middle">owner · ambiguous work</text>
+        <rect x="120" y="208" width="160" height="48" rx="6" fill="#f5f5f5"/><rect x="120" y="208" width="160" height="48" rx="6" fill="#ffffff" stroke="#c800c8"/><text x="200" y="240" fill="#2d3142" font-family="'Geist',sans-serif" font-size="12" font-weight="600" text-anchor="middle">Ventry</text><text x="200" y="252" fill="#4f5d75" font-family="'Geist Mono',monospace" font-size="9" text-anchor="middle">ventry.africa</text>
+        <rect x="332" y="208" width="160" height="48" rx="6" fill="#f5f5f5"/><rect x="332" y="208" width="160" height="48" rx="6" fill="#ffffff" stroke="#C2410C"/><text x="412" y="240" fill="#2d3142" font-family="'Geist',sans-serif" font-size="12" font-weight="600" text-anchor="middle">Vya</text><text x="412" y="252" fill="#4f5d75" font-family="'Geist Mono',monospace" font-size="9" text-anchor="middle">vya.to</text>
+        <rect x="548" y="208" width="160" height="48" rx="6" fill="#f5f5f5"/><rect x="548" y="208" width="160" height="48" rx="6" fill="#ffffff" stroke="#B8860B"/><text x="628" y="240" fill="#2d3142" font-family="'Geist',sans-serif" font-size="12" font-weight="600" text-anchor="middle">KrugerGold</text><text x="628" y="252" fill="#4f5d75" font-family="'Geist Mono',monospace" font-size="9" text-anchor="middle">kruger.gold</text>
+        <rect x="760" y="208" width="160" height="48" rx="6" fill="#f5f5f5"/><rect x="760" y="208" width="160" height="48" rx="6" fill="#ffffff" stroke="#2d3142"/><text x="840" y="240" fill="#2d3142" font-family="'Geist',sans-serif" font-size="12" font-weight="600" text-anchor="middle">Platform</text><text x="840" y="252" fill="#4f5d75" font-family="'Geist Mono',monospace" font-size="9" text-anchor="middle">erp · sycode · rag</text>
+        <line x1="40" y1="288" x2="1000" y2="288" stroke="rgba(45,49,66,.12)"/><text x="40" y="312" fill="#4f5d75" font-family="'Geist Mono',monospace" font-size="9" letter-spacing=".14em">LEGEND</text><rect x="132" y="300" width="16" height="12" rx="2" fill="rgba(235,108,54,.08)" stroke="#eb6c36"/><text x="156" y="310" fill="#4f5d75" font-family="'Geist Mono',monospace" font-size="9">front door</text><rect x="288" y="300" width="16" height="12" rx="2" fill="#ffffff" stroke="#2d3142"/><text x="312" y="310" fill="#4f5d75" font-family="'Geist Mono',monospace" font-size="9">line · brand edge</text>
+      </svg>
+    </div>
+
+    <div class="cards">
+      <div class="card"><p class="eyebrow">Org first</p><div class="card-header"><span class="card-dot coral"></span><h3>Organization</h3></div><p>Command, lines, owners and escalation paths. <a href="/operations/organization/">Open →</a></p></div>
+      <div class="card"><p class="eyebrow">Agents</p><div class="card-header"><span class="card-dot ink"></span><h3>Bots</h3></div><p>Sixteen gateway profiles by section. <a href="/operations/bots/">Open →</a></p></div>
+      <div class="card"><p class="eyebrow">Systems</p><div class="card-header"><span class="card-dot muted"></span><h3>Architecture</h3></div><p>Edge, VM and data planes — isolated here. <a href="/operations/topology/">Open →</a></p></div>
+    </div>
+
+    <div class="footer"><span>synotech · operations</span><span>diagram-design · light skin as shipped</span></div>
+  </div>
+</body>
 </html>

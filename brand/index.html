@@ -1,20 +1,34 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Brand — Synotech Operations</title>
-    <link rel="stylesheet" href="../src/style.css" />
-  </head>
-  <body>
-    <header class="wrap">
-      <p class="kicker">Synotech · Operations</p>
-      <h1>Brand</h1>
-      <p class="lede">Logos and palette per line, as served. Dark-surface lockups.</p>
-      <nav id="nav"></nav>
-    </header>
-    <main class="wrap" id="app"></main>
-    <footer class="wrap"><p>Source: RAG brand corpus · <code>synoptic-agents/operations</code>.</p></footer>
-    <script type="module" src="../src/brand.ts"></script>
-  </body>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Brand — Synotech Operations</title>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/operations/assets/dd.css">
+  <style>
+    .brandgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:1rem;margin-top:1.5rem}
+    .brandline img{height:38px;max-width:210px;display:block;margin:.6rem 0}
+    .brandline .swatchline{display:flex;align-items:center;gap:.5rem;margin-top:.4rem}
+    .swatch{width:14px;height:14px;border-radius:4px}
+    .swbar{height:5px;border-radius:3px;margin-bottom:.9rem}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <p class="header-eyebrow">Synotech · Operations · Brand</p>
+      <h1>Four lines, four marks</h1>
+      <p class="subtitle">Served lockups and palette, as shipped.</p>
+      <nav class="topnav"><a href="/operations/">Overview</a><a href="/operations/organization/">Organization</a><a href="/operations/topology/">Architecture</a><a href="/operations/bots/">Bots</a><a href="/operations/brand/" class="on">Brand</a></nav>
+    </div>
+    <div class="brandgrid">
+      <div class="card brandline"><p class="eyebrow">Operator</p><div class="swbar" style="background:#43ffc0"></div><img src="/operations/brand/synotech/logo.svg" alt="Synotech logo"><div class="card-header"><span class="card-dot coral"></span><h3>Synotech</h3></div><p>Estate-wide surfaces.</p><p class="swatchline"><span class="swatch" style="background:#43ffc0"></span><span style="font-family:var(--font-mono);font-size:.75rem">#43ffc0</span></p></div>
+      <div class="card brandline"><p class="eyebrow">ventry.africa</p><div class="swbar" style="background:#c800c8"></div><img src="/operations/brand/ventry/logo.svg" alt="Ventry logo"><div class="card-header"><span class="card-dot ink"></span><h3>Ventry</h3></div><p>Events + family wallet.</p><p class="swatchline"><span class="swatch" style="background:#c800c8"></span><span style="font-family:var(--font-mono);font-size:.75rem">#c800c8</span></p></div>
+      <div class="card brandline"><p class="eyebrow">vya.to</p><div class="swbar" style="background:#C2410C"></div><img src="/operations/brand/yaya/logo.svg" alt="Vya logo"><div class="card-header"><span class="card-dot ink"></span><h3>Vya</h3></div><p>E-hailing + logistics.</p><p class="swatchline"><span class="swatch" style="background:#C2410C"></span><span style="font-family:var(--font-mono);font-size:.75rem">#C2410C</span></p></div>
+      <div class="card brandline"><p class="eyebrow">kruger.gold</p><div class="swbar" style="background:#B8860B"></div><img src="/operations/brand/krugergold/logo.svg" alt="KrugerGold logo"><div class="card-header"><span class="card-dot ink"></span><h3>KrugerGold</h3></div><p>Gold-backed assets.</p><p class="swatchline"><span class="swatch" style="background:#B8860B"></span><span style="font-family:var(--font-mono);font-size:.75rem">#B8860B</span></p></div>
+    </div>
+    <div class="footer"><span>synotech · brand</span><span>lockups from the RAG brand corpus</span></div>
+  </div>
+</body>
 </html>

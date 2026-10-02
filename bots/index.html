@@ -1,20 +1,88 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Bots — Synotech Operations</title>
-    <link rel="stylesheet" href="../src/style.css" />
-  </head>
-  <body>
-    <header class="wrap">
-      <p class="kicker">Synotech · Operations</p>
-      <h1>Bots</h1>
-      <p class="lede">Sixteen profiles on the multiplexed OCI gateway. Dashboard: <span class="mono">agent.synotech.dev</span> · API: <span class="mono">agent.synotech.dev/v1</span>.</p>
-      <nav id="nav"></nav>
-    </header>
-    <main class="wrap" id="app"></main>
-    <footer class="wrap"><p>Source: <code>synoptic-agents/operations</code>.</p></footer>
-    <script type="module" src="../src/bots.ts"></script>
-  </body>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bots — Synotech Operations</title>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/operations/assets/dd.css">
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <p class="header-eyebrow">Synotech · Operations · Bots</p>
+      <h1>Sixteen profiles, four sections</h1>
+      <p class="subtitle">One detail chart per section: the pod, its members, and how each is invoked. Dashboard titles verbatim.</p>
+      <nav class="topnav"><a href="/operations/">Overview</a><a href="/operations/organization/">Organization</a><a href="/operations/topology/">Architecture</a><a href="/operations/bots/" class="on">Bots</a><a href="/operations/brand/">Brand</a></nav>
+    </div>
+
+    <div class="diagram-container">
+      <svg viewBox="0 0 1040 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Business development bots">
+        <rect width="1040" height="300" fill="#f5f5f5"/>
+        <defs><marker id="arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0,8 3,0 6" fill="#4f5d75"/></marker></defs>
+        <text x="40" y="44" fill="#4f5d75" font-family="'Geist Mono',monospace" font-size="9" letter-spacing=".16em">BUSINESS DEVELOPMENT</text>
+        <path d="M 520 92 L 520 128 L 260 128 L 260 176" fill="none" stroke="#4f5d75" stroke-width="1"/>
+        <path d="M 520 128 L 520 128 L 520 176" fill="none" stroke="#4f5d75" stroke-width="1"/>
+        <path d="M 520 128 L 780 128 L 780 176" fill="none" stroke="#4f5d75" stroke-width="1"/>
+        <rect x="420" y="44" width="200" height="48" rx="6" fill="#f5f5f5"/><rect x="420" y="44" width="200" height="48" rx="6" fill="#ffffff" stroke="#2d3142"/><rect x="428" y="52" width="32" height="12" rx="2" fill="transparent" stroke="#4f5d75" opacity=".45"/><text x="444" y="61" fill="#4f5d75" font-family="'Geist Mono',monospace" font-size="9" text-anchor="middle" letter-spacing=".08em">POD</text><text x="520" y="76" fill="#2d3142" font-family="'Geist',sans-serif" font-size="12" font-weight="600" text-anchor="middle">Business Development</text><text x="520" y="88" fill="#4f5d75" font-family="'Geist Mono',monospace" font-size="9" text-anchor="middle">deals · partners · finance</text>
+        <rect x="170" y="176" width="180" height="56" rx="6" fill="#f5f5f5"/><rect x="170" y="176" width="180" height="56" rx="6" fill="rgba(45,49,66,.05)" stroke="#4f5d75" stroke-width=".8"/><text x="260" y="204" fill="#2d3142" font-family="'Geist',sans-serif" font-size="12" font-weight="600" text-anchor="middle">Ventry Business</text><text x="260" y="220" fill="#4f5d75" font-family="'Geist Mono',monospace" font-size="9" text-anchor="middle">dashboard · events</text>
+        <rect x="430" y="176" width="180" height="56" rx="6" fill="#f5f5f5"/><rect x="430" y="176" width="180" height="56" rx="6" fill="rgba(45,49,66,.05)" stroke="#4f5d75" stroke-width=".8"/><text x="520" y="204" fill="#2d3142" font-family="'Geist',sans-serif" font-size="12" font-weight="600" text-anchor="middle">Vya Finance</text><text x="520" y="220" fill="#4f5d75" font-family="'Geist Mono',monospace" font-size="9" text-anchor="middle">dashboard · fares</text>
+        <rect x="690" y="176" width="180" height="56" rx="6" fill="#f5f5f5"/><rect x="690" y="176" width="180" height="56" rx="6" fill="rgba(45,49,66,.05)" stroke="#4f5d75" stroke-width=".8"/><text x="780" y="204" fill="#2d3142" font-family="'Geist',sans-serif" font-size="12" font-weight="600" text-anchor="middle">Kruger Finance</text><text x="780" y="220" fill="#4f5d75" font-family="'Geist Mono',monospace" font-size="9" text-anchor="middle">dashboard · gold</text>
+        <line x1="40" y1="260" x2="1000" y2="260" stroke="rgba(45,49,66,.12)"/><text x="40" y="284" fill="#4f5d75" font-family="'Geist Mono',monospace" font-size="9" letter-spacing=".14em">LEGEND</text><rect x="132" y="272" width="16" height="12" rx="2" fill="#ffffff" stroke="#2d3142"/><text x="156" y="282" fill="#4f5d75" font-family="'Geist Mono',monospace" font-size="9">pod</text><rect x="248" y="272" width="16" height="12" rx="2" fill="rgba(45,49,66,.05)" stroke="#4f5d75"/><text x="272" y="282" fill="#4f5d75" font-family="'Geist Mono',monospace" font-size="9">member bot</text>
+      </svg>
+    </div>
+
+    <div class="diagram-container" style="margin-top:1.5rem">
+      <svg viewBox="0 0 1040 380" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="ERP marketing bots">
+        <rect width="1040" height="380" fill="#f5f5f5"/>
+        <text x="40" y="44" fill="#4f5d75" font-family="'Geist Mono',monospace" font-size="9" letter-spacing=".16em">ERP ~ MARKETING</text>
+        <path d="M 520 92 L 520 128 L 260 128 L 260 176" fill="none" stroke="#4f5d75" stroke-width="1"/>
+        <path d="M 520 128 L 520 176" fill="none" stroke="#4f5d75" stroke-width="1"/>
+        <path d="M 520 128 L 780 128 L 780 176" fill="none" stroke="#4f5d75" stroke-width="1"/>
+        <rect x="420" y="44" width="200" height="48" rx="6" fill="#f5f5f5"/><rect x="420" y="44" width="200" height="48" rx="6" fill="#ffffff" stroke="#2d3142"/><rect x="428" y="52" width="32" height="12" rx="2" fill="transparent" stroke="#4f5d75" opacity=".45"/><text x="444" y="61" fill="#4f5d75" font-family="'Geist Mono',monospace" font-size="9" text-anchor="middle" letter-spacing=".08em">POD</text><text x="520" y="76" fill="#2d3142" font-family="'Geist',sans-serif" font-size="12" font-weight="600" text-anchor="middle">ERP ~ Marketing</text><text x="520" y="88" fill="#4f5d75" font-family="'Geist Mono',monospace" font-size="9" text-anchor="middle">leads · six markets</text>
+        <rect x="170" y="176" width="180" height="52" rx="6" fill="#f5f5f5"/><rect x="170" y="176" width="180" height="52" rx="6" fill="rgba(45,49,66,.05)" stroke="#4f5d75" stroke-width=".8"/><text x="260" y="202" fill="#2d3142" font-family="'Geist',sans-serif" font-size="12" font-weight="600" text-anchor="middle">ERP ~ Africa</text><text x="260" y="218" fill="#4f5d75" font-family="'Geist Mono',monospace" font-size="9" text-anchor="middle">roll-up</text>
+        <rect x="430" y="176" width="180" height="52" rx="6" fill="#f5f5f5"/><rect x="430" y="176" width="180" height="52" rx="6" fill="rgba(45,49,66,.05)" stroke="#4f5d75" stroke-width=".8"/><text x="520" y="202" fill="#2d3142" font-family="'Geist',sans-serif" font-size="12" font-weight="600" text-anchor="middle">ERP ~ South Africa</text><text x="520" y="218" fill="#4f5d75" font-family="'Geist Mono',monospace" font-size="9" text-anchor="middle">serving entity</text>
+        <rect x="690" y="176" width="180" height="52" rx="6" fill="#f5f5f5"/><rect x="690" y="176" width="180" height="52" rx="6" fill="rgba(45,49,66,.05)" stroke="#4f5d75" stroke-width=".8"/><text x="780" y="202" fill="#2d3142" font-family="'Geist',sans-serif" font-size="12" font-weight="600" text-anchor="middle">ERP ~ Zimbabwe</text><text x="780" y="218" fill="#4f5d75" font-family="'Geist Mono',monospace" font-size="9" text-anchor="middle">leads</text>
+        <path d="M 260 228 L 260 256 L 260 256 L 260 272" fill="none" stroke="#4f5d75" stroke-width="1"/>
+        <path d="M 520 228 L 520 256 L 520 256 L 520 272" fill="none" stroke="#4f5d75" stroke-width="1"/>
+        <path d="M 780 228 L 780 256 L 780 256 L 780 272" fill="none" stroke="#4f5d75" stroke-width="1"/>
+        <rect x="170" y="272" width="180" height="52" rx="6" fill="#f5f5f5"/><rect x="170" y="272" width="180" height="52" rx="6" fill="rgba(45,49,66,.05)" stroke="#4f5d75" stroke-width=".8"/><text x="260" y="298" fill="#2d3142" font-family="'Geist',sans-serif" font-size="12" font-weight="600" text-anchor="middle">ERP ~ Botswana</text><text x="260" y="314" fill="#4f5d75" font-family="'Geist Mono',monospace" font-size="9" text-anchor="middle">leads</text>
+        <rect x="430" y="272" width="180" height="52" rx="6" fill="#f5f5f5"/><rect x="430" y="272" width="180" height="52" rx="6" fill="rgba(45,49,66,.05)" stroke="#4f5d75" stroke-width=".8"/><text x="520" y="298" fill="#2d3142" font-family="'Geist',sans-serif" font-size="12" font-weight="600" text-anchor="middle">ERP ~ Zambia</text><text x="520" y="314" fill="#4f5d75" font-family="'Geist Mono',monospace" font-size="9" text-anchor="middle">via ZA entity</text>
+        <rect x="690" y="272" width="180" height="52" rx="6" fill="#f5f5f5"/><rect x="690" y="272" width="180" height="52" rx="6" fill="rgba(45,49,66,.05)" stroke="#4f5d75" stroke-width=".8"/><text x="780" y="298" fill="#2d3142" font-family="'Geist',sans-serif" font-size="12" font-weight="600" text-anchor="middle">ERP ~ Namibia</text><text x="780" y="314" fill="#4f5d75" font-family="'Geist Mono',monospace" font-size="9" text-anchor="middle">via ZA entity</text>
+        <line x1="40" y1="348" x2="1000" y2="348" stroke="rgba(45,49,66,.12)"/><text x="40" y="368" fill="#4f5d75" font-family="'Geist Mono',monospace" font-size="9" letter-spacing=".14em">NOTE</text><text x="132" y="368" fill="#4f5d75" font-family="'Geist Mono',monospace" font-size="9">second row continues the same pod — six members, one chart</text>
+      </svg>
+    </div>
+
+    <div class="diagram-container" style="margin-top:1.5rem">
+      <svg viewBox="0 0 1040 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Engineering and executive bots">
+        <rect width="1040" height="300" fill="#f5f5f5"/>
+        <text x="40" y="44" fill="#4f5d75" font-family="'Geist Mono',monospace" font-size="9" letter-spacing=".16em">ENGINEERING</text>
+        <text x="560" y="44" fill="#4f5d75" font-family="'Geist Mono',monospace" font-size="9" letter-spacing=".16em">EXECUTIVE</text>
+        <path d="M 270 92 L 270 120 L 130 120 L 130 168" fill="none" stroke="#4f5d75" stroke-width="1"/>
+        <path d="M 270 120 L 270 168" fill="none" stroke="#4f5d75" stroke-width="1"/>
+        <path d="M 270 120 L 410 120 L 410 168" fill="none" stroke="#4f5d75" stroke-width="1"/>
+        <path d="M 790 92 L 790 120 L 650 120 L 650 168" fill="none" stroke="#4f5d75" stroke-width="1"/>
+        <path d="M 790 120 L 790 168" fill="none" stroke="#4f5d75" stroke-width="1"/>
+        <path d="M 790 120 L 930 120 L 930 168" fill="none" stroke="#4f5d75" stroke-width="1"/>
+        <rect x="170" y="44" width="200" height="48" rx="6" fill="#f5f5f5"/><rect x="170" y="44" width="200" height="48" rx="6" fill="#ffffff" stroke="#2d3142"/><rect x="178" y="52" width="32" height="12" rx="2" fill="transparent" stroke="#4f5d75" opacity=".45"/><text x="194" y="61" fill="#4f5d75" font-family="'Geist Mono',monospace" font-size="9" text-anchor="middle" letter-spacing=".08em">POD</text><text x="270" y="76" fill="#2d3142" font-family="'Geist',sans-serif" font-size="12" font-weight="600" text-anchor="middle">Engineering</text><text x="270" y="88" fill="#4f5d75" font-family="'Geist Mono',monospace" font-size="9" text-anchor="middle">build · review · run</text>
+        <rect x="690" y="44" width="200" height="48" rx="6" fill="#f5f5f5"/><rect x="690" y="44" width="200" height="48" rx="6" fill="#ffffff" stroke="#2d3142"/><rect x="698" y="52" width="32" height="12" rx="2" fill="transparent" stroke="#4f5d75" opacity=".45"/><text x="714" y="61" fill="#4f5d75" font-family="'Geist Mono',monospace" font-size="9" text-anchor="middle" letter-spacing=".08em">POD</text><text x="790" y="76" fill="#2d3142" font-family="'Geist',sans-serif" font-size="12" font-weight="600" text-anchor="middle">Executive</text><text x="790" y="88" fill="#4f5d75" font-family="'Geist Mono',monospace" font-size="9" text-anchor="middle">decide · fund</text>
+        <rect x="40" y="168" width="180" height="56" rx="6" fill="#f5f5f5"/><rect x="40" y="168" width="180" height="56" rx="6" fill="rgba(45,49,66,.05)" stroke="#4f5d75" stroke-width=".8"/><text x="130" y="196" fill="#2d3142" font-family="'Geist',sans-serif" font-size="12" font-weight="600" text-anchor="middle">Full Stack Eng</text><text x="130" y="212" fill="#4f5d75" font-family="'Geist Mono',monospace" font-size="9" text-anchor="middle">web · app · be</text>
+        <rect x="240" y="168" width="180" height="56" rx="6" fill="#f5f5f5"/><rect x="240" y="168" width="180" height="56" rx="6" fill="rgba(45,49,66,.05)" stroke="#4f5d75" stroke-width=".8"/><text x="330" y="196" fill="#2d3142" font-family="'Geist',sans-serif" font-size="12" font-weight="600" text-anchor="middle">DevOps Eng</text><text x="330" y="212" fill="#4f5d75" font-family="'Geist Mono',monospace" font-size="9" text-anchor="middle">oci · edge · iac</text>
+        <rect x="440" y="168" width="80" height="56" rx="6" fill="#f5f5f5"/><rect x="440" y="168" width="80" height="56" rx="6" fill="rgba(45,49,66,.05)" stroke="#4f5d75" stroke-width=".8"/><text x="480" y="196" fill="#2d3142" font-family="'Geist',sans-serif" font-size="12" font-weight="600" text-anchor="middle">TL</text><text x="480" y="212" fill="#4f5d75" font-family="'Geist Mono',monospace" font-size="9" text-anchor="middle">review</text>
+        <rect x="560" y="168" width="180" height="56" rx="6" fill="#f5f5f5"/><rect x="560" y="168" width="180" height="56" rx="6" fill="rgba(45,49,66,.05)" stroke="#4f5d75" stroke-width=".8"/><text x="650" y="196" fill="#2d3142" font-family="'Geist',sans-serif" font-size="12" font-weight="600" text-anchor="middle">Chief Executive</text><text x="650" y="212" fill="#4f5d75" font-family="'Geist Mono',monospace" font-size="9" text-anchor="middle">direction</text>
+        <rect x="760" y="168" width="110" height="56" rx="6" fill="#f5f5f5"/><rect x="760" y="168" width="110" height="56" rx="6" fill="rgba(45,49,66,.05)" stroke="#4f5d75" stroke-width=".8"/><text x="815" y="196" fill="#2d3142" font-family="'Geist',sans-serif" font-size="12" font-weight="600" text-anchor="middle">Finance</text><text x="815" y="212" fill="#4f5d75" font-family="'Geist Mono',monospace" font-size="9" text-anchor="middle">costs</text>
+        <rect x="890" y="168" width="110" height="56" rx="6" fill="#f5f5f5"/><rect x="890" y="168" width="110" height="56" rx="6" fill="rgba(45,49,66,.05)" stroke="#4f5d75" stroke-width=".8"/><text x="945" y="196" fill="#2d3142" font-family="'Geist',sans-serif" font-size="12" font-weight="600" text-anchor="middle">Ops</text><text x="945" y="212" fill="#4f5d75" font-family="'Geist Mono',monospace" font-size="9" text-anchor="middle">uptime</text>
+        <line x1="40" y1="252" x2="1000" y2="252" stroke="rgba(45,49,66,.12)"/><text x="40" y="276" fill="#4f5d75" font-family="'Geist Mono',monospace" font-size="9" letter-spacing=".14em">LEGEND</text><rect x="132" y="264" width="16" height="12" rx="2" fill="#ffffff" stroke="#2d3142"/><text x="156" y="274" fill="#4f5d75" font-family="'Geist Mono',monospace" font-size="9">pod</text><rect x="248" y="264" width="16" height="12" rx="2" fill="rgba(45,49,66,.05)" stroke="#4f5d75"/><text x="272" y="274" fill="#4f5d75" font-family="'Geist Mono',monospace" font-size="9">member bot</text>
+      </svg>
+    </div>
+
+    <div class="cards">
+      <div class="card"><p class="eyebrow">Invoke</p><div class="card-header"><span class="card-dot coral"></span><h3>Dashboard, API, channel</h3></div><p>Every bot answers on the dashboard switcher, the /v1 API, and its messaging channel. Pick the surface, not the bot.</p></div>
+      <div class="card"><p class="eyebrow">Skills</p><div class="card-header"><span class="card-dot ink"></span><h3>Assigned, not piled on</h3></div><ul><li>Full-stack: software-development + web</li><li>DevOps: devops · Tech Lead: review subset</li><li>Exec: productivity + note-taking</li></ul></div>
+      <div class="card"><p class="eyebrow">Source</p><div class="card-header"><span class="card-dot muted"></span><h3>Repo truth</h3></div><p>Distributions in synoptic-agents/hermes/bots, synced to the box. Model default is central.</p></div>
+    </div>
+
+    <div class="footer"><span>synotech · bots</span><span>diagram-design · org chart detail, light skin as shipped</span></div>
+  </div>
+</body>
 </html>

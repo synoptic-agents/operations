@@ -28,3 +28,9 @@ npx wrangler deploy   # worker upload works with the SSM API token; the
 Route (`wrangler.jsonc`): `agent.synotech.dev/operations*` (public, no Access
 gate — owner decision). Canary: `/operations/__health`. `base: '/operations/'`
 in `vite.config.ts` must match the mount path.
+
+## Formatting (estate standard)
+
+- Prettier is `{ useTabs: true, singleQuote: true, semi: false, printWidth: 120, trailingComma: "all" }` (tabs, indent width 4 via `.editorconfig`), in `.prettierrc`. Do not restyle it.
+- Husky pre-commit runs `lint-staged`. Manual: `npm run format` / `npm run format:check`.
+- `.editorconfig` at the repo root is authoritative for indent/line-endings. Do not add competing indent rules.
